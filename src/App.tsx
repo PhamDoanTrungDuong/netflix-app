@@ -1,9 +1,33 @@
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import { AuthContextProvider } from "./Context/AuthContext";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Account from "./pages/Account";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
-  );
+	return (
+		<>
+			<AuthContextProvider>
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+					<Route
+						path="/account"
+						element={
+							<ProtectedRoute>
+								<Account />
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
+			</AuthContextProvider>
+		</>
+	);
 }
 
 export default App;
