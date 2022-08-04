@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import requests from "../Request";
 import axios from "axios";
 import { IMovie } from "../Interface/IMovie";
+import { Link } from "react-router-dom";
 
 const Main: React.FC = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -11,6 +12,8 @@ const Main: React.FC = () => {
     });
   }, []);
   const movie = movies[Math.floor(Math.random() * movies.length)];
+
+  console.log(movie)
 
   const truncateString = (str: string, num: number) => {
     if(str?.length > num) {
@@ -32,7 +35,9 @@ const Main: React.FC = () => {
           <h1 className="text-3xl md:text-5xl font-bold my-4">{movie?.title}</h1>
           <div>
             <button className="border bg-gray-300 text-black  border-gray-300 py-2 px-5 hover:text-white hover:bg-transparent duration-200">
-              Play
+              <Link to={`/movie/${movie?.id}`}>
+                Play
+              </Link>
             </button>
             <button className="text-white border border-gray-300 py-2 px-5 ml-4 hover:text-black hover:bg-gray-300 duration-300">
               Watch Later
